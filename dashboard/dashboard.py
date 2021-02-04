@@ -8,16 +8,7 @@ import os
 
 
 class Dashboard:
-    def __init__(self, path):
-        self.path = path
-        """
-        if path is None:
-            self.ltm_data_dir = ltm_data_path()
-        else:
-            self.ltm_data_dir = path + "/ltm_data/"
-        """
-
-    def open(
+    def __init__(
         self,
         plots=[
             "score_statistics",
@@ -27,17 +18,23 @@ class Dashboard:
             "parallel_coordinates",
         ],
     ):
+        self.plots = plots
+
+    def open_search_data_file(self, path):
         abspath = os.path.abspath(__file__)
         dname = os.path.dirname(abspath)
 
-        streamlit_plot_args = " ".join(plots)
+        streamlit_plot_args = " ".join(self.plots)
 
         command = (
             "streamlit run "
             + dname
             + "/st_script.py "
-            + self.path
+            + path
             + " "
             + streamlit_plot_args
         )
         os.system(command)
+
+    def open_search_data_path(self, search_data_path, model_name=None, study_name=None):
+        pass
