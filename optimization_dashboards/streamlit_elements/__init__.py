@@ -2,13 +2,10 @@
 # Email: simon.blanke@yahoo.com
 # License: MIT License
 
-__version__ = "0.0.1"
-__license__ = "MIT"
 
-
-from .dashboard import Dashboard
+from .streamlit_setup import create_streamlit_setup
 
 
 __all__ = [
-    "Dashboard",
+    "create_streamlit_setup",
 ]

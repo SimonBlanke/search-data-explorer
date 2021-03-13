@@ -10,32 +10,28 @@
 
 
 
-
-
-
-
-
+<br>
 
 ## Examples
 
 ```python
 import pandas as pd
-from dashboard import Dashboard
+from optimization_dashboards import OptimizationPlotter
 
 # create so test dataset for this example
 df_array = [[0.5, 6, 50, 0.6], [0.9, 7, 40, 0.7], [0.2, 9, 70, 0.8]]
 columns = ["x1", "x2", "x3", "score"]
 search_data = pd.DataFrame(df_array, columns=columns)
 # save the dataframe to file
-search_data.to_csv("./search_data")
+search_data.to_csv("./search_data.csv")
 
 
-board = Dashboard()
+board = OptimizationPlotter()
 # the dashboard must read the dataframe from a file
-board.open_search_data_file("./search_data")
+board.open("./search_data.csv")
 ```
 
-The search data that is loaded from file must always follow the following pattern:
+The search data that is loaded from file must always follow the pattern below:
 
 <table class="table">
 <thead class="table-head">
@@ -78,16 +74,3 @@ Hereby "x1", "x2", ... can be given any name. But "score" is always necessary!
 
 
 
-
-
-## API reference
-
-- Dashboard(plots=[
-            "score_statistics",
-            "1d_scatter",
-            "2d_scatter",
-            "3d_scatter",
-            "parallel_coordinates",
-                ]
-        )
-- .open_search_data_file(path)

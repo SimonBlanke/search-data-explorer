@@ -24,8 +24,8 @@ def find_version(*filepath):
 
 
 setup(
-    name="optimization-dashboard",
-    version=find_version("dashboard/__init__.py"),
+    name="optimization_dashboards",
+    version=find_version("optimization_dashboards/__init__.py"),
     author="Simon Blanke",
     author_email="simon.blanke@yahoo.com",
     license="MIT",
