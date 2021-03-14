@@ -3,11 +3,11 @@
 # License: MIT License
 
 
-from .plotly_plots import parallel_coordinates, scatter_2d, scatter_3d
+from .plotly_plots import parallel_coordinates_plotly, scatter_plotly, scatter_3d_plotly
 
 
 __all__ = [
-    "parallel_coordinates",
-    "scatter_2d",
-    "scatter_3d",
+    "parallel_coordinates_plotly",
+    "scatter_plotly",
+    "scatter_3d_plotly",
 ]
