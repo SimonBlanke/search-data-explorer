@@ -5,11 +5,19 @@
 import streamlit as st
 
 from .streamlit_sidebar import create_sidebar
-from .streamlit_widgets import parallel_coordinates_element
+from .streamlit_widgets import (
+    scatter_1d_element,
+    scatter_2d_element,
+    scatter_3d_element,
+    parallel_coordinates_element,
+)
 
 
 def create_streamlit_setup(search_data):
     elements_dict = {
+        "1D Scatter Plot": scatter_1d_element,
+        "2D Scatter Plot": scatter_2d_element,
+        "3D Scatter Plot": scatter_3d_element,
         "Parallel Coordinates Plot": parallel_coordinates_element,
     }
 

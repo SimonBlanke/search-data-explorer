@@ -9,11 +9,15 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 
-from .streamlit_plots import parallel_coordinates, scatter_2d, scatter_3d
+from .streamlit_plots import (
+    parallel_coordinates_plotly,
+    scatter_plotly,
+    scatter_3d_plotly,
+)
 from .pandas_filters import filter_parameter
 
 
-def _select_color_para(search_data, col1):
+def _select_color_para(search_data, col1, key):
     para_names = list(search_data.columns)
     if "score" in para_names:
         color_index = para_names.index("score")
@@ -24,12 +28,14 @@ def _select_color_para(search_data, col1):
         "Color Parameter",
         para_names,
         index=color_index,
+        key=key + "_color",
     )
 
     return color_para
 
 
 def parallel_coordinates_element(search_data):
+    func_name = str(parallel_coordinates_element.__name__)
     st.text("")
     col1, col2 = st.beta_columns(2)
 
@@ -37,78 +43,121 @@ def parallel_coordinates_element(search_data):
     col1.text("")
     col2.text("")
 
-    search_data_fil = filter_parameter(search_data, col1)
-    color_para = _select_color_para(search_data_fil, col1)
+    search_data_fil = filter_parameter(search_data, col1, func_name)
+    color_para = _select_color_para(search_data_fil, col1, func_name)
 
-    fig = parallel_coordinates(search_data_fil, color=color_para)
+    fig = parallel_coordinates_plotly(search_data_fil, color=color_para)
+
+    col2.plotly_chart(fig)
+
+
+def scatter_1d_element(search_data):
+    func_name = str(scatter_1d_element.__name__)
+
+    para_names = search_data.columns
+
+    st.text("")
+    col1, col2 = st.beta_columns(2)
+
+    col1.header("1D Scatter Plot")
+    col1.text("")
+
+    scatter1_para1 = col1.selectbox(
+        "1D scatter plot parameter 1",
+        para_names,
+        index=0,
+        key=func_name + "_para1",
+    )
+    scatter2_para2 = col1.selectbox(
+        "2D scatter plot parameter 2",
+        para_names,
+        index=1,
+        key=func_name + "_para2",
+    )
+
+    fig = px.scatter(search_data, x=scatter1_para1, y=scatter2_para2)
 
     col2.plotly_chart(fig)
 
 
 def scatter_2d_element(search_data):
-    para_names = search_data.columns.drop("score")
+    func_name = str(scatter_2d_element.__name__)
+
+    para_names = search_data.columns
 
     st.text("")
     col1, col2 = st.beta_columns(2)
 
-    col1.header("2D Scatter plot")
+    col1.header("2D Scatter Plot")
     col1.text("")
 
     scatter2_para1 = col1.selectbox(
         "2D scatter plot parameter 1",
         para_names,
         index=0,
+        key=func_name + "_para1",
     )
     scatter2_para2 = col1.selectbox(
         "2D scatter plot parameter 2",
         para_names,
         index=1,
+        key=func_name + "_para2",
     )
 
-    fig = scatter_2d(
+    color_para = _select_color_para(search_data, col1, func_name)
+
+    fig = scatter_plotly(
         search_data,
         x=scatter2_para1,
         y=scatter2_para2,
-        color="score",
+        color=color_para,
     )
     col2.plotly_chart(fig)
 
 
 def scatter_3d_element(search_data):
-    para_names = search_data.columns.drop("score")
+    func_name = str(scatter_3d_element.__name__)
+
+    para_names = search_data.columns
 
     st.text("")
     col1, col2 = st.beta_columns(2)
 
-    col1.header("3D Scatter plot")
+    col1.header("3D Scatter Plot")
     col1.text("")
 
     scatter3_para1 = col1.selectbox(
         "3D scatter plot parameter 1",
         para_names,
         index=0,
+        key=func_name + "_para1",
     )
     scatter3_para2 = col1.selectbox(
         "3D scatter plot parameter 2",
         para_names,
         index=1,
+        key=func_name + "_para2",
     )
     scatter3_para3 = col1.selectbox(
         "3D scatter plot parameter 3",
         para_names,
         index=2,
+        key=func_name + "_para3",
     )
 
-    fig = scatter_3d(
+    color_para = _select_color_para(search_data, col1, func_name)
+
+    fig = scatter_3d_plotly(
         search_data,
         x=scatter3_para1,
         y=scatter3_para2,
         z=scatter3_para3,
-        color="score",
+        color=color_para,
     )
     col2.plotly_chart(fig)
 
 
+"""
 def _score_statistics(search_data):
     values_ = search_data["score"].values
 
@@ -140,63 +189,6 @@ def _score_statistics(search_data):
     _score_statistics_plot(search_data)
 
 
-def _1d_scatter(search_data):
-    from sklearn.gaussian_process import GaussianProcessRegressor
-
-    para_names = search_data.columns.drop("score")
-
-    st.text("")
-    col1, col2 = st.beta_columns(2)
-
-    col1.header("1D Scatter plot")
-    col1.text("")
-
-    scatter1_para1 = col1.selectbox(
-        "1D scatter plot parameter 1",
-        para_names,
-        index=0,
-    )
-
-    fig1 = px.scatter(
-        search_data, x=scatter1_para1, y=search_data["score"]
-    ).update_layout(width=1000, height=600)
-
-    x_train_1D = search_data[scatter1_para1].values.reshape(-1, 1)
-
-    gpr = GaussianProcessRegressor()
-    gpr.fit(x_train_1D, search_data["score"])
-
-    print("\n x_train_1D \n", x_train_1D)
-
-    min_ = -10
-    max_ = 10
-    step = 0.1
-
-    x_plot = np.arange(min_, max_, step).reshape(-1, 1)
-
-    mu, sigma = gpr.predict(x_plot, return_std=True)
-    mu = mu.reshape(-1, 1)
-    sigma = sigma.reshape(-1, 1)
-
-    line_df = {
-        "x": x_plot.reshape(
-            -1,
-        ),
-        "bayes fit": mu.reshape(
-            -1,
-        ),
-    }
-
-    y_upper = mu + sigma
-    y_lower = mu - sigma
-
-    fig2 = px.line(line_df, x="x", y="bayes fit")
-
-    fig3 = go.Figure(data=fig1.data + fig2.data)
-
-    col2.plotly_chart(fig3)
-
-
 def _search_data(search_data):
     fig = go.Figure(
         data=[
@@ -216,3 +208,4 @@ def _search_data(search_data):
     )
 
     st.plotly_chart(fig)
+"""
