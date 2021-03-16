@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 
 
 from .streamlit_plots import (
+    parallel_categories_plotly,
     parallel_coordinates_plotly,
     scatter_plotly,
     scatter_3d_plotly,
@@ -47,6 +48,23 @@ def parallel_coordinates_element(search_data):
     color_para = _select_color_para(search_data_fil, col1, func_name)
 
     fig = parallel_coordinates_plotly(search_data_fil, color=color_para)
+
+    col2.plotly_chart(fig)
+
+
+def parallel_categories_element(search_data):
+    func_name = str(parallel_categories_element.__name__)
+    st.text("")
+    col1, col2 = st.beta_columns(2)
+
+    col1.header("Parallel Corrdinates")
+    col1.text("")
+    col2.text("")
+
+    search_data_fil = filter_parameter(search_data, col1, func_name)
+    color_para = _select_color_para(search_data_fil, col1, func_name)
+
+    fig = parallel_categories_plotly(search_data_fil, color=color_para)
 
     col2.plotly_chart(fig)
 

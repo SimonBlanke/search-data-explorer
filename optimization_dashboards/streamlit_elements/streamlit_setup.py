@@ -10,6 +10,7 @@ from .streamlit_widgets import (
     scatter_2d_element,
     scatter_3d_element,
     parallel_coordinates_element,
+    parallel_categories_element,
 )
 
 
@@ -19,6 +20,7 @@ def create_streamlit_setup(search_data):
         "2D Scatter Plot": scatter_2d_element,
         "3D Scatter Plot": scatter_3d_element,
         "Parallel Coordinates Plot": parallel_coordinates_element,
+        "Parallel Categories Plot": parallel_categories_element,
     }
 
     st.set_page_config(page_title="Hyperactive Dashboard", layout="wide")

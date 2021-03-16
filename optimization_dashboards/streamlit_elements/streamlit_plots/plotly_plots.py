@@ -12,6 +12,10 @@ def parallel_coordinates_plotly(*args, **kwargs):
     return px.parallel_coordinates(*args, **kwargs, color_continuous_scale=color_scale)
 
 
+def parallel_categories_plotly(*args, **kwargs):
+    return px.parallel_categories(*args, **kwargs, color_continuous_scale=color_scale)
+
+
 def scatter_plotly(*args, **kwargs):
     return px.scatter(*args, **kwargs, color_continuous_scale=color_scale)
 
