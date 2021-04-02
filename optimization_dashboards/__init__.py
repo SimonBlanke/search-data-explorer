@@ -6,11 +6,9 @@ __version__ = "0.0.1"
 __license__ = "MIT"
 
 
-from .dashboards import DataExplorer, ProgressBoard, OptimizationPlotter
+from .dashboards import OptimizationPlotter
 
 
 __all__ = [
-    "DataExplorer",
-    "ProgressBoard",
     "OptimizationPlotter",
 ]
