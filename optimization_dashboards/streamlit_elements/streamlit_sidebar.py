@@ -9,7 +9,7 @@ def create_sidebar(elements_dict):
     scatter_plots = st.sidebar.multiselect(
         label="Scatter Plots",
         options=list(elements_dict.keys()),
-        default=["Parallel Coordinates Plot"],
+        default=["1D Scatter Plot", "Parallel Coordinates Plot"],
     )
 
     return scatter_plots

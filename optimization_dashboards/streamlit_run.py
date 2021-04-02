@@ -4,8 +4,8 @@
 
 import sys
 
-from streamlit_elements import create_streamlit_setup
 from read_search_data import read_search_data
+from streamlit_elements import create_streamlit_setup
 
 
 path = sys.argv[1]

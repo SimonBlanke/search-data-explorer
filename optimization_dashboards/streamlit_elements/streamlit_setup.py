@@ -23,7 +23,10 @@ def create_streamlit_setup(search_data):
         "Parallel Categories Plot": parallel_categories_element,
     }
 
-    st.set_page_config(page_title="Hyperactive Dashboard", layout="wide")
+    try:
+        st.set_page_config(page_title="Hyperactive Dashboard", layout="wide")
+    except:
+        pass
 
     st.sidebar.title("Optimization Plotter")
     st.sidebar.text("")
