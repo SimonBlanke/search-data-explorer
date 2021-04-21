@@ -16,6 +16,7 @@ def filter_parameter(search_data, col1, key):
     )
 
     search_data = search_data.drop(para_names_rem, axis=1)
+    para_names = search_data.columns
 
     para_names_fil = col1.multiselect(
         label="Filter Parameters:",
