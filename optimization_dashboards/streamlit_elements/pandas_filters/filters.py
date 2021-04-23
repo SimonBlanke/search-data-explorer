@@ -2,12 +2,26 @@
 # Email: simon.blanke@yahoo.com
 # License: MIT License
 
-import uuid
 import numpy as np
+import numbers
+
+
+def _get_numeric_data_types(search_data):
+    para_names = search_data.columns
+
+    numeric_data_types = []
+    for para_name in para_names:
+        value0 = search_data[para_name][0]
+
+        if isinstance(value0, numbers.Number):
+            numeric_data_types.append(para_name)
+
+    return numeric_data_types
 
 
 def filter_parameter(search_data, col1, key):
     para_names = search_data.columns
+    numeric_data_types = _get_numeric_data_types(search_data)
 
     para_names_rem = col1.multiselect(
         label="Remove Parameters:",
@@ -16,7 +30,8 @@ def filter_parameter(search_data, col1, key):
     )
 
     search_data = search_data.drop(para_names_rem, axis=1)
-    para_names = search_data.columns
+    para_names_ = search_data.columns
+    para_names = list(set(numeric_data_types).intersection(para_names_))
 
     para_names_fil = col1.multiselect(
         label="Filter Parameters:",
