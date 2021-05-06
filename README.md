@@ -1,5 +1,5 @@
 <H1 align="center">
-    Optimization Dashboard
+    Tabular Data Explorer
 </H1>
 
 <br>
@@ -16,7 +16,7 @@
 
 ```python
 import pandas as pd
-from optimization_dashboards import OptimizationPlotter
+from tabular_data_explorer import TabularDataExplorer
 
 # create so test dataset for this example
 df_array = [[0.5, 6, 50, 0.6], [0.9, 7, 40, 0.7], [0.2, 9, 70, 0.8]]
@@ -26,9 +26,9 @@ search_data = pd.DataFrame(df_array, columns=columns)
 search_data.to_csv("./search_data.csv")
 
 
-board = OptimizationPlotter()
+data_explorer = TabularDataExplorer()
 # the dashboard must read the dataframe from a file
-board.open("./search_data.csv")
+data_explorer.open("./search_data.csv")
 ```
 
 The search data that is loaded from file must always follow the pattern below:
