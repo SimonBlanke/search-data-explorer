@@ -3,7 +3,7 @@ install:
 
 
 reinstall:
-	pip uninstall -y optimization_dashboards
-	rm -fr build dist optimization_dashboards.egg-info
+	pip uninstall -y tabular_data_explorer
+	rm -fr build dist tabular_data_explorer.egg-info
 	python setup.py bdist_wheel
 	pip install dist/*

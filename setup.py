@@ -24,16 +24,16 @@ def find_version(*filepath):
 
 
 setup(
-    name="optimization_dashboards",
-    version=find_version("optimization_dashboards/__init__.py"),
+    name="tabular_data_explorer",
+    version=find_version("tabular_data_explorer/__init__.py"),
     author="Simon Blanke",
     author_email="simon.blanke@yahoo.com",
     license="MIT",
     description=" ",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    keywords=["optimization"],
-    url="https://github.com/SimonBlanke/optimization-dashboard",
+    keywords=["visualization", "data-science"],
+    url="https://github.com/SimonBlanke/tabular-data-explorer",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
