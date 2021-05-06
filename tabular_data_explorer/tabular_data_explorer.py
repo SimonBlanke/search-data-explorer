@@ -5,7 +5,7 @@
 import os
 
 
-class OptimizationPlotter:
+class TabularDataExplorer:
     def __init__(self):
         pass
 
