@@ -5,7 +5,7 @@
 <br>
 
 <H2 align="center">
-    Visualize multidimensional data from studies performed by Hyperactive and Gradient-Free-Optimizers.
+    Visualize dataframes via plotly in a streamlit dashboard
 </H2>
 
 
