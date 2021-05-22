@@ -14,6 +14,29 @@
 
 ## Examples
 
+Visualize the iris dataset:
+
+```python
+import pandas as pd
+from sklearn.datasets import load_iris
+
+from tabular_data_explorer import TabularDataExplorer
+
+iris = load_iris()
+iris_dataset = pd.DataFrame(iris.data, columns=iris.feature_names)
+iris_dataset["target"] = iris.target
+
+iris_dataset.to_csv("iris_dataset.csv", index=False)
+
+board = TabularDataExplorer()
+board.open("iris_dataset.csv")
+
+```
+
+<br>
+
+Create some test data and visualize it:
+
 ```python
 import pandas as pd
 from tabular_data_explorer import TabularDataExplorer
@@ -31,14 +54,16 @@ data_explorer = TabularDataExplorer()
 data_explorer.open("./search_data.csv")
 ```
 
-The search data that is loaded from file must always follow the pattern below:
+<br>
+
+The search data that is loaded from file must follow the pattern below. The columns can have any name and some plots can handle data other than numerical.
 
 <table class="table">
 <thead class="table-head">
     <tr class="row">
-    <td class="cell">score</td>
-    <td class="cell">x1</td>
-    <td class="cell">x2</td>
+    <td class="cell">first column name</td>
+    <td class="cell">another column name</td>
+    <td class="cell">bla bla bla</td>
     <td class="cell">...</td>
     </tr>
 </thead>
@@ -70,7 +95,6 @@ The search data that is loaded from file must always follow the pattern below:
 </tbody>
 </table>
 
-Hereby "x1", "x2", ... can be given any name. But "score" is always necessary!
 
 
 
