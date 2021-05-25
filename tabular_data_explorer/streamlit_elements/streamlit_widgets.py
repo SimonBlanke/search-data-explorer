@@ -2,10 +2,7 @@
 # Email: simon.blanke@yahoo.com
 # License: MIT License
 
-import numpy as np
-import pandas as pd
 import streamlit as st
-import plotly.express as px
 import plotly.graph_objects as go
 
 from .streamlit_plots import (
@@ -21,11 +18,11 @@ plotly_width = 1200
 plotly_height = 600
 
 
-def init_columns():
+def init_columns(plot_title):
     st.text("")
     col1, col2 = st.beta_columns([1, 2])
 
-    col1.header("Correlation Heatmap")
+    col1.header(plot_title)
     col1.text("")
     col2.text("")
 
@@ -51,7 +48,7 @@ def _select_color_para(search_data, col1, key):
 
 def correlation_heatmap_element(search_data):
     plot_title = "Correlation Heatmap"
-    col1, col2 = init_columns()
+    col1, col2 = init_columns(plot_title)
 
     search_data_f = add_parameters(search_data, col1, plot_title)
     fig = correlation_heatmap(search_data_f)
@@ -61,7 +58,7 @@ def correlation_heatmap_element(search_data):
 
 def parallel_coordinates_element(search_data):
     plot_title = "Parallel Corrdinates"
-    col1, col2 = init_columns()
+    col1, col2 = init_columns(plot_title)
 
     search_data_fil = filter_parameter(search_data, col1, plot_title)
     color_para = _select_color_para(search_data_fil, col1, plot_title)
@@ -74,7 +71,7 @@ def parallel_coordinates_element(search_data):
 
 def parallel_categories_element(search_data):
     plot_title = "Parallel Categories"
-    col1, col2 = init_columns()
+    col1, col2 = init_columns(plot_title)
 
     search_data_fil = filter_parameter(search_data, col1, plot_title)
     color_para = _select_color_para(search_data_fil, col1, plot_title)
@@ -87,7 +84,7 @@ def parallel_categories_element(search_data):
 
 def scatter_element(search_data):
     plot_title = "Scatter Plot"
-    col1, col2 = init_columns()
+    col1, col2 = init_columns(plot_title)
 
     para_names = search_data.columns
 
@@ -117,7 +114,7 @@ def scatter_element(search_data):
 
 def scatter_2d_element(search_data):
     plot_title = "2D Scatter Plot"
-    col1, col2 = init_columns()
+    col1, col2 = init_columns(plot_title)
 
     para_names = search_data.columns
 
@@ -149,7 +146,7 @@ def scatter_2d_element(search_data):
 
 def scatter_3d_element(search_data):
     plot_title = "3D Scatter Plot"
-    col1, col2 = init_columns()
+    col1, col2 = init_columns(plot_title)
 
     para_names = search_data.columns
 
