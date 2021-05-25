@@ -23,25 +23,19 @@ Coming soon
 Visualize the iris dataset:
 
 ```python
-import pandas as pd
-from sklearn.datasets import load_iris
-
+import plotly.express as px
 from tabular_data_explorer import TabularDataExplorer
 
-iris = load_iris()
-iris_dataset = pd.DataFrame(iris.data, columns=iris.feature_names)
-iris_dataset["target"] = iris.target
-
+iris_dataset = px.data.iris()
 iris_dataset.to_csv("iris_dataset.csv", index=False)
 
 board = TabularDataExplorer()
 board.open("iris_dataset.csv")
-
 ```
 
 <br>
 
-Create some test data and visualize it:
+Or create your own test data and visualize it:
 
 ```python
 import pandas as pd
