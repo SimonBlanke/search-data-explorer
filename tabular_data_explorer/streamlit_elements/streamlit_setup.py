@@ -5,29 +5,32 @@
 import streamlit as st
 
 from .streamlit_widgets import (
-    scatter_2d_element,
-    scatter_3d_element,
-    parallel_coordinates_element,
-    parallel_categories_element,
-    correlation_heatmap_element,
+    scatter_2d_plotly_widget,
+    scatter_3d_plotly_widget,
+    parallel_coordinates_plotly_widget,
+    parallel_categories_plotly_widget,
+    parallel_coordinates_hiplot_widget,
+    correlation_heatmap_seaborn_widget,
 )
 
 
 plots_select_dict = {
-    "2D Scatter Plot": scatter_2d_element,
-    "3D Scatter Plot": scatter_3d_element,
-    "Parallel Coordinates Plot": parallel_coordinates_element,
-    "Parallel Categories Plot": parallel_categories_element,
-    "Correlation Heatmap": correlation_heatmap_element,
+    "2D Scatter Plotly": scatter_2d_plotly_widget,
+    "3D Scatter Plotly": scatter_3d_plotly_widget,
+    "Parallel Coordinates Plotly": parallel_coordinates_plotly_widget,
+    "Parallel Categories Plotly": parallel_categories_plotly_widget,
+    "Parallel Categories HiPlot": parallel_coordinates_hiplot_widget,
+    "Correlation Heatmap Seaborn": correlation_heatmap_seaborn_widget,
 }
 
 
 plots_default_dict = {
-    "2D-Scatter-Plot": "2D Scatter Plot",
-    "3D-Scatter-Plot": "3D Scatter Plot",
-    "Parallel-Coordinates-Plot": "Parallel Coordinates Plot",
-    "Parallel-Categories-Plot": "Parallel Categories Plot",
-    "Correlation-Heatmap": "Correlation Heatmap",
+    "2D-Scatter-Plotly": "2D Scatter Plotly",
+    "3D-Scatter-Plotly": "3D Scatter Plotly",
+    "Parallel-Coordinates-Plotly": "Parallel Coordinates Plotly",
+    "Parallel-Categories-Plotly": "Parallel Categories Plotly",
+    "Parallel-Categories-HiPlot": "Parallel Categories HiPlot",
+    "Correlation-Heatmap-Seaborn": "Correlation Heatmap Seaborn",
 }
 
 

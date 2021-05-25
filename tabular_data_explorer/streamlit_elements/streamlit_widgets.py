@@ -4,6 +4,7 @@
 
 import streamlit as st
 import plotly.graph_objects as go
+import hiplot as hip
 
 from .streamlit_plots import (
     parallel_categories_plotly,
@@ -46,7 +47,7 @@ def _select_color_para(search_data, col1, key):
     return color_para
 
 
-def correlation_heatmap_element(search_data):
+def correlation_heatmap_seaborn_widget(search_data):
     plot_title = "Correlation Heatmap"
     col1, col2 = init_columns(plot_title)
 
@@ -56,7 +57,21 @@ def correlation_heatmap_element(search_data):
     col2.pyplot(fig)
 
 
-def parallel_coordinates_element(search_data):
+def parallel_coordinates_hiplot_widget(search_data):
+    plot_title = "Parallel Corrdinates"
+    col1, col2 = init_columns(plot_title)
+
+    col1.header("Parallel Corrdinates")
+    col1.text("")
+    col2.text("")
+
+    search_data_fil = filter_parameter(search_data, col1, plot_title)
+
+    xp = hip.Experiment.from_dataframe(search_data_fil)
+    ret_val = xp.display_st(key="key1")
+
+
+def parallel_coordinates_plotly_widget(search_data):
     plot_title = "Parallel Corrdinates"
     col1, col2 = init_columns(plot_title)
 
@@ -69,7 +84,7 @@ def parallel_coordinates_element(search_data):
     col2.plotly_chart(fig)
 
 
-def parallel_categories_element(search_data):
+def parallel_categories_plotly_widget(search_data):
     plot_title = "Parallel Categories"
     col1, col2 = init_columns(plot_title)
 
@@ -82,7 +97,7 @@ def parallel_categories_element(search_data):
     col2.plotly_chart(fig)
 
 
-def scatter_element(search_data):
+def scatter_plotly_widget(search_data):
     plot_title = "Scatter Plot"
     col1, col2 = init_columns(plot_title)
 
@@ -112,7 +127,7 @@ def scatter_element(search_data):
     col2.plotly_chart(fig)
 
 
-def scatter_2d_element(search_data):
+def scatter_2d_plotly_widget(search_data):
     plot_title = "2D Scatter Plot"
     col1, col2 = init_columns(plot_title)
 
@@ -144,7 +159,7 @@ def scatter_2d_element(search_data):
     col2.plotly_chart(fig)
 
 
-def scatter_3d_element(search_data):
+def scatter_3d_plotly_widget(search_data):
     plot_title = "3D Scatter Plot"
     col1, col2 = init_columns(plot_title)
 
