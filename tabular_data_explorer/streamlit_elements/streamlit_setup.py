@@ -34,7 +34,7 @@ def create_streamlit_setup(search_data, default_plots=["1D Scatter Plot"]):
     st.sidebar.text("")
 
     plot_names = st.sidebar.multiselect(
-        label="Plots:",
+        label="Select Plots:",
         options=list(plots_dict.keys()),
         default=default_plots,
     )
