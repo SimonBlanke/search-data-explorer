@@ -8,14 +8,28 @@ import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
 
-
 from .streamlit_plots import (
     parallel_categories_plotly,
     parallel_coordinates_plotly,
     scatter_plotly,
     scatter_3d_plotly,
+    correlation_heatmap,
 )
-from .pandas_filters import filter_parameter
+from .pandas_filters import filter_parameter, add_parameters
+
+plotly_width = 1200
+plotly_height = 600
+
+
+def init_columns():
+    st.text("")
+    col1, col2 = st.beta_columns([1, 2])
+
+    col1.header("Correlation Heatmap")
+    col1.text("")
+    col2.text("")
+
+    return col1, col2
 
 
 def _select_color_para(search_data, col1, key):
@@ -35,94 +49,92 @@ def _select_color_para(search_data, col1, key):
     return color_para
 
 
+def correlation_heatmap_element(search_data):
+    plot_title = "Correlation Heatmap"
+    col1, col2 = init_columns()
+
+    search_data_f = add_parameters(search_data, col1, plot_title)
+    fig = correlation_heatmap(search_data_f)
+
+    col2.pyplot(fig)
+
+
 def parallel_coordinates_element(search_data):
-    func_name = str(parallel_coordinates_element.__name__)
-    st.text("")
-    col1, col2 = st.beta_columns(2)
+    plot_title = "Parallel Corrdinates"
+    col1, col2 = init_columns()
 
-    col1.header("Parallel Corrdinates")
-    col1.text("")
-    col2.text("")
-
-    search_data_fil = filter_parameter(search_data, col1, func_name)
-    color_para = _select_color_para(search_data_fil, col1, func_name)
+    search_data_fil = filter_parameter(search_data, col1, plot_title)
+    color_para = _select_color_para(search_data_fil, col1, plot_title)
 
     fig = parallel_coordinates_plotly(search_data_fil, color=color_para)
+    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     col2.plotly_chart(fig)
 
 
 def parallel_categories_element(search_data):
-    func_name = str(parallel_categories_element.__name__)
-    st.text("")
-    col1, col2 = st.beta_columns(2)
+    plot_title = "Parallel Categories"
+    col1, col2 = init_columns()
 
-    col1.header("Parallel Corrdinates")
-    col1.text("")
-    col2.text("")
-
-    search_data_fil = filter_parameter(search_data, col1, func_name)
-    color_para = _select_color_para(search_data_fil, col1, func_name)
+    search_data_fil = filter_parameter(search_data, col1, plot_title)
+    color_para = _select_color_para(search_data_fil, col1, plot_title)
 
     fig = parallel_categories_plotly(search_data_fil, color=color_para)
+    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     col2.plotly_chart(fig)
 
 
-def scatter_1d_element(search_data):
-    func_name = str(scatter_1d_element.__name__)
+def scatter_element(search_data):
+    plot_title = "Scatter Plot"
+    col1, col2 = init_columns()
 
     para_names = search_data.columns
 
-    st.text("")
-    col1, col2 = st.beta_columns(2)
-
-    col1.header("1D Scatter Plot")
-    col1.text("")
-
-    scatter1_para1 = col1.selectbox(
+    scatter_para1 = col1.selectbox(
         "1D scatter plot parameter 1",
         para_names,
         index=0,
-        key=func_name + "_para1",
+        key=plot_title + "_para1",
     )
-    scatter2_para2 = col1.selectbox(
+    scatter_para2 = col1.selectbox(
         "2D scatter plot parameter 2",
         para_names,
         index=1,
-        key=func_name + "_para2",
+        key=plot_title + "_para2",
     )
-
-    fig = px.scatter(search_data, x=scatter1_para1, y=scatter2_para2)
+    scatter_para3 = col1.selectbox(
+        "2D scatter plot color parameter",
+        para_names,
+        index=2,
+        key=plot_title + "_para3",
+    )
+    fig = px.scatter(search_data, x=scatter_para1, y=scatter_para2, color=scatter_para3)
+    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     col2.plotly_chart(fig)
 
 
 def scatter_2d_element(search_data):
-    func_name = str(scatter_2d_element.__name__)
+    plot_title = "2D Scatter Plot"
+    col1, col2 = init_columns()
 
     para_names = search_data.columns
-
-    st.text("")
-    col1, col2 = st.beta_columns(2)
-
-    col1.header("2D Scatter Plot")
-    col1.text("")
 
     scatter2_para1 = col1.selectbox(
         "2D scatter plot parameter 1",
         para_names,
         index=0,
-        key=func_name + "_para1",
+        key=plot_title + "_para1",
     )
     scatter2_para2 = col1.selectbox(
         "2D scatter plot parameter 2",
         para_names,
         index=1,
-        key=func_name + "_para2",
+        key=plot_title + "_para2",
     )
 
-    color_para = _select_color_para(search_data, col1, func_name)
+    color_para = _select_color_para(search_data, col1, plot_title)
 
     fig = scatter_plotly(
         search_data,
@@ -130,40 +142,37 @@ def scatter_2d_element(search_data):
         y=scatter2_para2,
         color=color_para,
     )
+    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
+
     col2.plotly_chart(fig)
 
 
 def scatter_3d_element(search_data):
-    func_name = str(scatter_3d_element.__name__)
+    plot_title = "3D Scatter Plot"
+    col1, col2 = init_columns()
 
     para_names = search_data.columns
-
-    st.text("")
-    col1, col2 = st.beta_columns(2)
-
-    col1.header("3D Scatter Plot")
-    col1.text("")
 
     scatter3_para1 = col1.selectbox(
         "3D scatter plot parameter 1",
         para_names,
         index=0,
-        key=func_name + "_para1",
+        key=plot_title + "_para1",
     )
     scatter3_para2 = col1.selectbox(
         "3D scatter plot parameter 2",
         para_names,
         index=1,
-        key=func_name + "_para2",
+        key=plot_title + "_para2",
     )
     scatter3_para3 = col1.selectbox(
         "3D scatter plot parameter 3",
         para_names,
         index=2,
-        key=func_name + "_para3",
+        key=plot_title + "_para3",
     )
 
-    color_para = _select_color_para(search_data, col1, func_name)
+    color_para = _select_color_para(search_data, col1, plot_title)
 
     fig = scatter_3d_plotly(
         search_data,
@@ -172,58 +181,6 @@ def scatter_3d_element(search_data):
         z=scatter3_para3,
         color=color_para,
     )
+    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
+
     col2.plotly_chart(fig)
-
-
-"""
-def _score_statistics(search_data):
-    values_ = search_data["score"].values
-
-    mean_ = values_.mean()
-    std_ = values_.std()
-    min_ = np.amin(values_)
-    max_ = np.amax(values_)
-
-    df_data = pd.DataFrame(
-        [[mean_, std_, min_, max_]],
-        index=["score"],
-        columns=["mean", "std", "min", "max"],
-    )
-
-    col1, col2 = st.beta_columns(2)
-
-    col1.header("Score statistics")
-    col1.text("")
-    col2.text("")
-
-    col1.table(df_data)
-
-    def _score_statistics_plot(search_data):
-        fig = px.histogram(
-            search_data, x="score", nbins=int(len(search_data))
-        ).update_layout(width=1000, height=300)
-        col2.plotly_chart(fig)
-
-    _score_statistics_plot(search_data)
-
-
-def _search_data(search_data):
-    fig = go.Figure(
-        data=[
-            go.Table(
-                header=dict(
-                    values=list(search_data.columns),
-                    # fill_color="paleturquoise",
-                    align="left",
-                ),
-                cells=dict(
-                    values=search_data.transpose().values.tolist(),
-                    # fill_color="lavender",
-                    align="left",
-                ),
-            ),
-        ]
-    )
-
-    st.plotly_chart(fig)
-"""
