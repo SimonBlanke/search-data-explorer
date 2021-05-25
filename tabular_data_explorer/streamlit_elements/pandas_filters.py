@@ -19,6 +19,17 @@ def _get_numeric_data_types(search_data):
     return numeric_data_types
 
 
+def add_parameters(search_data, col1, key):
+    para_names = list(search_data.columns)
+    para_names_f = col1.multiselect(
+        label="Parameters:",
+        options=para_names,
+        key=key + "_remove",
+        default=para_names,
+    )
+    return search_data[para_names_f]
+
+
 def filter_parameter(search_data, col1, key):
     para_names = search_data.columns
     numeric_data_types = _get_numeric_data_types(search_data)
