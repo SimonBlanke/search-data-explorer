@@ -12,11 +12,9 @@ from .streamlit_plots import (
     scatter_plotly,
     scatter_3d_plotly,
     correlation_heatmap,
+    scatter_matrix_plotly,
 )
 from .pandas_filters import filter_parameter, add_parameters
-
-plotly_width = 1200
-plotly_height = 600
 
 
 def init_columns(plot_title):
@@ -40,6 +38,17 @@ def _select_color_para(search_data, col1, key):
     )
 
     return color_para
+
+
+def scatter_matrix_plotly_widget(search_data):
+    plot_title = "Scatter Matrix"
+    col1, col2 = init_columns(plot_title)
+
+    search_data_f = add_parameters(search_data, col1, plot_title)
+    color_para = _select_color_para(search_data_f, col1, plot_title)
+
+    fig = scatter_matrix_plotly(search_data_f, color=color_para)
+    col2.plotly_chart(fig)
 
 
 def correlation_heatmap_seaborn_widget(search_data):
@@ -70,8 +79,6 @@ def parallel_coordinates_plotly_widget(search_data):
     color_para = _select_color_para(search_data_fil, col1, plot_title)
 
     fig = parallel_coordinates_plotly(search_data_fil, color=color_para)
-    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
-
     col2.plotly_chart(fig)
 
 
@@ -83,7 +90,6 @@ def parallel_categories_plotly_widget(search_data):
     color_para = _select_color_para(search_data_fil, col1, plot_title)
 
     fig = parallel_categories_plotly(search_data_fil, color=color_para)
-    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     col2.plotly_chart(fig)
 
@@ -113,7 +119,6 @@ def scatter_plotly_widget(search_data):
         key=plot_title + "_para3",
     )
     fig = px.scatter(search_data, x=scatter_para1, y=scatter_para2, color=scatter_para3)
-    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     col2.plotly_chart(fig)
 
@@ -145,7 +150,6 @@ def scatter_2d_plotly_widget(search_data):
         y=scatter2_para2,
         color=color_para,
     )
-    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     col2.plotly_chart(fig)
 
@@ -184,6 +188,5 @@ def scatter_3d_plotly_widget(search_data):
         z=scatter3_para3,
         color=color_para,
     )
-    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     col2.plotly_chart(fig)
