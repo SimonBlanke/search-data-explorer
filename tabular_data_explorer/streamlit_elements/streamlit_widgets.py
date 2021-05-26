@@ -20,12 +20,7 @@ plotly_height = 600
 
 
 def init_columns(plot_title):
-    st.text("")
     col1, col2 = st.beta_columns([1, 2])
-
-    col1.header(plot_title)
-    col1.text("")
-    col2.text("")
 
     return col1, col2
 
@@ -60,10 +55,6 @@ def correlation_heatmap_seaborn_widget(search_data):
 def parallel_coordinates_hiplot_widget(search_data):
     plot_title = "Parallel Corrdinates"
     col1, col2 = init_columns(plot_title)
-
-    col1.header("Parallel Corrdinates")
-    col1.text("")
-    col2.text("")
 
     search_data_fil = filter_parameter(search_data, col1, plot_title)
 

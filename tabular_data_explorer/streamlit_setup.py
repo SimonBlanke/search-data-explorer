@@ -4,7 +4,8 @@
 
 import streamlit as st
 
-from .streamlit_widgets import (
+from toc import Toc
+from streamlit_elements.streamlit_widgets import (
     scatter_2d_plotly_widget,
     scatter_3d_plotly_widget,
     parallel_coordinates_plotly_widget,
@@ -52,5 +53,17 @@ def create_streamlit_setup(search_data, plots):
         options=list(plots_select_dict.keys()),
         default=plots_default,
     )
+
+    toc = Toc()
+    toc.placeholder(sidebar=True)
+
     for plot_name in plot_names:
+        toc.title(plot_name)
+        st.components.v1.html(
+            """<hr style="height:1px;border:none;color:#333;background-color:#333;" /> """
+        )
         plots_select_dict[plot_name](search_data)
+        for _ in range(5):
+            st.write(" ")
+
+    toc.generate()
