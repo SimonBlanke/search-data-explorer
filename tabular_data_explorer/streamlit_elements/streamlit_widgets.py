@@ -13,6 +13,7 @@ from .streamlit_plots import (
     scatter_3d_plotly,
     correlation_heatmap,
     scatter_matrix_plotly,
+    table_plotly,
 )
 from .pandas_filters import filter_parameter, add_parameters
 
@@ -38,6 +39,15 @@ def _select_color_para(search_data, col1, key):
     )
 
     return color_para
+
+
+def table_plotly_widget(search_data):
+    col1, col2 = st.beta_columns([1, 1])
+
+    col1.header("First 10 rows")
+    col1.dataframe(search_data.head(10))
+    col2.header("Last 10 rows")
+    col2.dataframe(search_data.tail(10))
 
 
 def scatter_matrix_plotly_widget(search_data):
@@ -68,7 +78,7 @@ def parallel_coordinates_hiplot_widget(search_data):
     search_data_fil = filter_parameter(search_data, col1, plot_title)
 
     xp = hip.Experiment.from_dataframe(search_data_fil)
-    ret_val = xp.display_st(key="key1")
+    ret_val = xp.display_st(key=plot_title)
 
 
 def parallel_coordinates_plotly_widget(search_data):

@@ -13,6 +13,7 @@ from streamlit_elements.streamlit_widgets import (
     parallel_coordinates_hiplot_widget,
     correlation_heatmap_seaborn_widget,
     scatter_matrix_plotly_widget,
+    table_plotly_widget,
 )
 
 
@@ -24,6 +25,7 @@ plots_select_dict = {
     "Parallel Categories (HiPlot)": parallel_coordinates_hiplot_widget,
     "Correlation Heatmap (Seaborn)": correlation_heatmap_seaborn_widget,
     "Scatter Matrix (Plotly)": scatter_matrix_plotly_widget,
+    "Table (Plotly)": table_plotly_widget,
 }
 
 
@@ -35,6 +37,7 @@ plots_default_dict = {
     "Parallel-Categories-HiPlot": "Parallel Categories (HiPlot)",
     "Correlation-Heatmap-Seaborn": "Correlation Heatmap (Seaborn)",
     "Scatter-Matrix-Plotly": "Scatter Matrix (Plotly)",
+    "Table-Plotly": "Table (Plotly)",
 }
 
 
@@ -57,16 +60,18 @@ def create_streamlit_setup(search_data, plots):
         default=plots_default,
     )
 
+    st.sidebar.title("Table of contents")
     toc = Toc()
     toc.placeholder(sidebar=True)
 
     for plot_name in plot_names:
         toc.title(plot_name)
         st.components.v1.html(
-            """<hr style="height:1px;border:none;color:#333;background-color:#333;" /> """
+            """<hr style="height:1px;border:none;color:#333;background-color:#333;" /> """,
+            height=10,
         )
         plots_select_dict[plot_name](search_data)
-        for _ in range(5):
+        for _ in range(7):
             st.write(" ")
 
     toc.generate()
