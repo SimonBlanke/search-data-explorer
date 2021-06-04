@@ -19,18 +19,79 @@ def _get_numeric_data_types(search_data):
     return numeric_data_types
 
 
-def add_parameters(search_data, col1, key):
+def get_types(search_data):
+    col_types = {}
+    numeric = []
+    categorical = []
+
+    columns = list(search_data.columns)
+    for column in columns:
+        if search_data[column].dtype == np.number:
+            col_types[column] = "numeric"
+            numeric.append(column)
+        else:
+            col_types[column] = "category"
+            categorical.append(column)
+
+    return col_types, numeric, categorical
+
+
+def add_parameters_num(search_data, col1, key):
+    col_types, numeric, categorical = get_types(search_data)
+
     para_names = list(search_data.columns)
     para_names_f = col1.multiselect(
         label="Parameters:",
         options=para_names,
         key=key + "_remove",
-        default=para_names,
+        default=numeric,
     )
-    return search_data[para_names_f]
+    return para_names_f
 
 
-def filter_parameter(search_data, col1, key):
+def select_color_para_cat(search_data, col1, key):
+    col_types, numeric, categorical = get_types(search_data)
+    # print("categorical", categorical)
+    para_names = list(search_data.columns)
+    if "score" in para_names:
+        color_index = para_names.index("score")
+    elif len(categorical) != 0:
+        color_index = para_names.index(categorical[0])
+    else:
+        color_index = 0
+
+    color_para = col1.selectbox(
+        "Color Parameter",
+        para_names,
+        index=color_index,
+        key=key + "_color",
+    )
+
+    return color_para
+
+
+def select_color_para_num(search_data, col1, key):
+    col_types, numeric, categorical = get_types(search_data)
+    # print("categorical", categorical)
+    para_names = list(search_data.columns)
+    if "score" in para_names:
+        color_index = para_names.index("score")
+    elif len(categorical) != 0:
+        color_index = para_names.index(numeric[0])
+    else:
+        color_index = 0
+
+    color_para = col1.selectbox(
+        "Color Parameter",
+        para_names,
+        index=color_index,
+        key=key + "_color",
+    )
+
+    return color_para
+
+
+def remove_parameter(search_data, col1, key):
     para_names = search_data.columns
     numeric_data_types = _get_numeric_data_types(search_data)
 
@@ -43,6 +104,10 @@ def filter_parameter(search_data, col1, key):
     search_data = search_data.drop(para_names_rem, axis=1)
     para_names_ = search_data.columns
     para_names = list(set(numeric_data_types).intersection(para_names_))
+
+
+def filter_parameter(search_data, col1, key):
+    para_names = search_data.columns
 
     para_names_fil = col1.multiselect(
         label="Filter Parameters:",
