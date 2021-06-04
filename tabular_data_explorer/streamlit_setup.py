@@ -55,12 +55,11 @@ def create_streamlit_setup(search_data, plots):
     st.sidebar.text("")
 
     plot_names = st.sidebar.multiselect(
-        label="Select Plots:",
+        label="Select Widgets:",
         options=list(plots_select_dict.keys()),
         default=plots_default,
     )
 
-    st.sidebar.title("Table of contents")
     toc = Toc()
     toc.placeholder(sidebar=True)
 
