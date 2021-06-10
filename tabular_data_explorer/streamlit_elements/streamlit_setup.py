@@ -2,10 +2,13 @@
 # Email: simon.blanke@yahoo.com
 # License: MIT License
 
+# This file must be below streamlit_run to enable relative import of modules
+
+
 import streamlit as st
 
-from toc import Toc
-from streamlit_elements.streamlit_widgets import (
+from .toc import Toc
+from .streamlit_widgets import (
     scatter_2d_plotly_widget,
     scatter_3d_plotly_widget,
     parallel_coordinates_plotly_widget,

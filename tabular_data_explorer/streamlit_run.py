@@ -5,11 +5,16 @@
 import sys
 
 from read_search_data import read_search_data
-from streamlit_setup import create_streamlit_setup
+from streamlit_elements.streamlit_setup import create_streamlit_setup
 
 
-path = sys.argv[1]
-plots = sys.argv[2:]
+def main():
+    path = sys.argv[1]
+    plots = sys.argv[2:]
 
-search_data = read_search_data(path)
-create_streamlit_setup(search_data, plots)
+    search_data = read_search_data(path)
+    create_streamlit_setup(search_data, plots)
+
+
+if __name__ == "__main__":
+    main()
