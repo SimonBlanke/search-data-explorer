@@ -20,7 +20,7 @@ class TabularDataExplorer:
         command = "streamlit run " + dname + "/streamlit_run.py " + arg1 + args
         os.system(command)
 
-    def open(self, input):
+    def open(self, input=None):
         if isinstance(input, pd.DataFrame):
             df = input
             df.to_csv("df_temp.csv", index=False)
@@ -33,4 +33,8 @@ class TabularDataExplorer:
 
         elif isinstance(input, str):
             path = input
+            self._run_streamlit(path)
+
+        elif input is None:
+            path = "no_path"
             self._run_streamlit(path)

@@ -5,6 +5,7 @@
 # This file must be below streamlit_run to enable relative import of modules
 
 
+import pandas as pd
 import streamlit as st
 
 from .toc import Toc
@@ -57,23 +58,29 @@ def create_streamlit_setup(search_data, plots):
     st.sidebar.text("")
     st.sidebar.text("")
 
-    plot_names = st.sidebar.multiselect(
-        label="Select Widgets:",
-        options=list(plots_select_dict.keys()),
-        default=plots_default,
-    )
+    if search_data is None:
+        uploaded_file = st.sidebar.file_uploader("Choose a file")
+        if uploaded_file is not None:
+            search_data = pd.read_csv(uploaded_file)
 
-    toc = Toc()
-    toc.placeholder(sidebar=True)
-
-    for plot_name in plot_names:
-        toc.title(plot_name)
-        st.components.v1.html(
-            """<hr style="height:1px;border:none;color:#333;background-color:#333;" /> """,
-            height=10,
+    if search_data is not None:
+        plot_names = st.sidebar.multiselect(
+            label="Select Widgets:",
+            options=list(plots_select_dict.keys()),
+            default=plots_default,
         )
-        plots_select_dict[plot_name](search_data)
-        for _ in range(7):
-            st.write(" ")
 
-    toc.generate()
+        toc = Toc()
+        toc.placeholder(sidebar=True)
+
+        for plot_name in plot_names:
+            toc.title(plot_name)
+            st.components.v1.html(
+                """<hr style="height:1px;border:none;color:#333;background-color:#333;" /> """,
+                height=10,
+            )
+            plots_select_dict[plot_name](search_data)
+            for _ in range(7):
+                st.write(" ")
+
+        toc.generate()

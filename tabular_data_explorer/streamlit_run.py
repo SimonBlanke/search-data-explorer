@@ -12,7 +12,11 @@ def main():
     path = sys.argv[1]
     plots = sys.argv[2:]
 
-    search_data = read_search_data(path)
+    if path == "no_path":
+        search_data = None
+    else:
+        search_data = read_search_data(path)
+
     create_streamlit_setup(search_data, plots)
 
 
