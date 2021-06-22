@@ -106,9 +106,7 @@ def remove_parameter(search_data, col1, key):
     para_names = list(set(numeric_data_types).intersection(para_names_))
 
 
-def filter_parameter(search_data, col1, key):
-    para_names = search_data.columns
-
+def filter_parameter(search_data, para_names, col1, key):
     para_names_fil = col1.multiselect(
         label="Filter Parameters:",
         options=para_names,

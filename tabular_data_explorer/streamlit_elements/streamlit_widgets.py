@@ -37,6 +37,7 @@ def table_plotly_widget(search_data):
 
     search_data_f = filter_parameter(
         search_data,
+        search_data.columns,
         col1,
         plot_title,
     )
@@ -87,7 +88,7 @@ def parallel_coordinates_hiplot_widget(search_data):
     col1, col2 = st.beta_columns([1, 2])
 
     para_names_f = add_parameters_num(search_data, col1, plot_title)
-    search_data_f = filter_parameter(search_data[para_names_f], col1, plot_title)
+    search_data_f = filter_parameter(search_data, para_names_f, col1, plot_title)
 
     parallel_coordinates_hiplot(search_data_f, plot_title)
 
@@ -97,10 +98,11 @@ def parallel_coordinates_plotly_widget(search_data):
     col1, col2 = st.beta_columns([1, 2])
 
     para_names_f = add_parameters_num(search_data, col1, plot_title)
-    color_para = select_color_para_num(search_data, col1, plot_title)
+    search_data_f = filter_parameter(search_data, para_names_f, col1, plot_title)
+    color_para = select_color_para_num(search_data_f, col1, plot_title)
 
     fig = parallel_coordinates_plotly(
-        search_data, dimensions=para_names_f, color=color_para
+        search_data_f, dimensions=para_names_f, color=color_para
     )
     col2.plotly_chart(fig)
 
@@ -110,7 +112,8 @@ def parallel_categories_plotly_widget(search_data):
     col1, col2 = st.beta_columns([1, 2])
 
     para_names_f = add_parameters_num(search_data, col1, plot_title)
-    color_para = select_color_para_num(search_data, col1, plot_title)
+    search_data_f = filter_parameter(search_data, para_names_f, col1, plot_title)
+    color_para = select_color_para_num(search_data_f, col1, plot_title)
 
     fig = parallel_categories_plotly(
         search_data, dimensions=para_names_f, color=color_para
