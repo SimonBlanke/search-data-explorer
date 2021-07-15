@@ -5,7 +5,7 @@
 import sys
 
 from read_search_data import read_search_data
-from streamlit_elements.streamlit_setup import create_streamlit_setup
+from streamlit_setup import create_streamlit_setup
 
 
 def main():
