@@ -13,6 +13,26 @@ import seaborn as sns
 color_scale = px.colors.sequential.Jet
 
 
+def plot_missing_values(df, _st_):
+    import plotly.express as px
+
+    color_scale = [
+        [0.0, "rgba(0, 255, 0, 0.25)"],
+        [0.5, "rgba(0, 255, 0, 0.25)"],
+        [0.5, "rgba(255, 0, 0, 0.75)"],
+        [1, "rgba(255, 0, 0, 0.75)"],
+    ]
+
+    df_miss_o = df.isnull()
+
+    fig = px.imshow(
+        df_miss_o,
+        color_continuous_scale=color_scale,
+    )
+    fig.update(layout_coloraxis_showscale=False)
+    _st_.plotly_chart(fig)
+
+
 def plot_duplicate_rows(df, _st_):
     color_scale = [
         [0.0, "rgba(0, 0, 0, 0.25)"],
