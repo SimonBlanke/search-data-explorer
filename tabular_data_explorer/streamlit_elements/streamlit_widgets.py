@@ -38,22 +38,56 @@ def select_dataframe(search_data_dict, st_, key):
 
 def table_overview_widget(search_data_dict):
     widget_title = "table_overview_widget"
-    col1, col2 = st.beta_columns([1, 1])
+    col1, col2, col3 = st.beta_columns([1, 1, 1])
     search_data = select_dataframe(search_data_dict, col1, widget_title)
 
     n_columns = len(search_data.columns)
     n_rows = len(search_data)
-    n_miss_cells = search_data.isnull().sum()
-    n_miss_perc = n_miss_cells / len(search_data) * 100
+    n_miss_cells = search_data.isnull().sum().sum()
+    n_miss_perc = n_miss_cells / (n_rows * n_columns) * 100
     n_duplic_rows = search_data.duplicated().sum()
-    n_duplic_perc = n_duplic_rows / len(search_data) * 100
+    n_duplic_perc = n_duplic_rows / (n_rows * n_columns) * 100
     size_mem = search_data.memory_usage(index=True).sum()
 
     dtypes_l = list(search_data.dtypes)
     dtypes_d = {x: dtypes_l.count(x) for x in dtypes_l}
 
-    plot_missing_values(search_data, col2)
-    plot_duplicate_rows(search_data, col1)
+    import numpy as np
+    import pandas as pd
+
+    df = pd.DataFrame(
+        np.random.randn(3, 1),
+        columns=["Statistics"],
+        index=["bla1", "bla2", "bla3"],
+    )
+    print("\n df \n", df)
+    print("\n df index \n", df.index)
+
+    duplic_rows = str(n_duplic_rows) + " [" + str(round(n_duplic_perc, 2)) + "%]"
+    miss_cells = str(n_miss_cells) + " [" + str(round(n_miss_perc, 2)) + "%]"
+
+    print("\n n_duplic_rows  \n", n_duplic_rows)
+    print("\n n_duplic_perc  \n", n_duplic_perc)
+
+    stat_dict = {
+        "Number of rows": n_rows,
+        "Number of columns": n_columns,
+        "Duplicate rows": duplic_rows,
+        "Missing cells": miss_cells,
+        "Size in memory": size_mem,
+    }
+    stat_df = pd.DataFrame.from_dict(stat_dict, orient="index", columns=["Statistics"])
+    types_df = pd.DataFrame.from_dict(
+        dtypes_d, orient="index", columns=["Column types"]
+    )
+
+    col1.table(stat_df)
+    col1.table(types_df)
+
+    col2.header(" Duplicate rows")
+    plot_duplicate_rows(search_data, col2)
+    col3.header(" Missing values")
+    plot_missing_values(search_data, col3)
 
     col1.header("First 10 rows")
     col1.dataframe(search_data.head(10))
