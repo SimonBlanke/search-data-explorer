@@ -36,6 +36,16 @@ def get_types(search_data):
     return col_types, numeric, categorical
 
 
+def select_col(search_data, col1, key):
+    para_names = list(search_data.columns)
+    para_names_f = col1.multiselect(
+        label="Parameters:",
+        options=para_names,
+        key=key + "_select_col",
+    )
+    return para_names_f
+
+
 def add_parameters_num(search_data, col1, key):
     col_types, numeric, categorical = get_types(search_data)
 
