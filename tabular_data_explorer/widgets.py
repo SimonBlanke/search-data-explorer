@@ -12,6 +12,9 @@ from streamlit_elements.streamlit_widgets import (
     correlation_heatmap_seaborn_widget,
     scatter_matrix_plotly_widget,
     table_plotly_widget,
+    template_widget,
+    preprocessing_widget,
+    table_overview_widget,
 )
 
 
@@ -24,6 +27,13 @@ plots_select_dict = {
     "Correlation Heatmap (Seaborn)": correlation_heatmap_seaborn_widget,
     "Scatter Matrix (Plotly)": scatter_matrix_plotly_widget,
     "Table (Plotly)": table_plotly_widget,
+    "Overview": table_overview_widget,
+}
+
+
+processing_dict = {
+    "template_widget": template_widget,
+    "preprocessing_widget": preprocessing_widget,
 }
 
 
@@ -36,4 +46,5 @@ plots_default_dict = {
     "Correlation-Heatmap-Seaborn": "Correlation Heatmap (Seaborn)",
     "Scatter-Matrix-Plotly": "Scatter Matrix (Plotly)",
     "Table-Plotly": "Table (Plotly)",
+    "Overview": "Overview",
 }
