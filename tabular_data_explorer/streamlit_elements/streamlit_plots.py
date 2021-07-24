@@ -3,6 +3,7 @@
 # License: MIT License
 
 import numpy as np
+import pandas as pd
 import hiplot as hip
 import plotly.express as px
 import plotly.graph_objects as go
@@ -10,6 +11,34 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 color_scale = px.colors.sequential.Jet
+
+
+def plot_duplicate_rows(df, _st_):
+    color_scale = [
+        [0.0, "rgba(0, 0, 0, 0.25)"],
+        [0.5, "rgba(0, 0, 0, 0.25)"],
+        [0.5, "rgba(255, 255, 255, 0.75)"],
+        [1, "rgba(255, 255, 255, 0.75)"],
+    ]
+    color_scale = [
+        [0.0, "rgba(255, 0, 0, 0.75)"],
+        [0.5, "rgba(255, 0, 0, 0.75)"],
+        [0.5, "rgba(0, 255, 0, 0.25)"],
+        [1, "rgba(0, 255, 0, 0.25)"],
+    ]
+
+    dupl = df.duplicated()
+    n_col = len(df.columns)
+
+    df_dupl_o = pd.DataFrame([[i] * n_col for i in dupl])
+    df_dupl_o.columns = df.columns
+
+    fig = px.imshow(
+        df_dupl_o,
+        color_continuous_scale=color_scale,
+    )
+    fig.update(layout_coloraxis_showscale=False)
+    _st_.plotly_chart(fig)
 
 
 def table_plotly(search_data, plotly_width=1200, plotly_height=600):
