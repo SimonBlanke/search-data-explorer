@@ -13,6 +13,17 @@ import seaborn as sns
 color_scale = px.colors.sequential.Jet
 
 
+def plot_hist(*args, **kwargs):
+    return px.histogram(*args, **kwargs)
+
+
+def scatter_plotly(*args, plotly_width=1200, plotly_height=600, **kwargs):
+    fig = px.scatter(*args, **kwargs, color_continuous_scale=color_scale)
+    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
+
+    return fig
+
+
 def plot_missing_values(df, _st_):
     import plotly.express as px
 
@@ -126,13 +137,6 @@ def parallel_coordinates_plotly(*args, plotly_width=1200, plotly_height=600, **k
 
 def parallel_categories_plotly(*args, plotly_width=1200, plotly_height=600, **kwargs):
     fig = px.parallel_categories(*args, **kwargs, color_continuous_scale=color_scale)
-    fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
-
-    return fig
-
-
-def scatter_plotly(*args, plotly_width=1200, plotly_height=600, **kwargs):
-    fig = px.scatter(*args, **kwargs, color_continuous_scale=color_scale)
     fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     return fig

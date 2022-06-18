@@ -3,4 +3,3 @@ pandas
 matplotlib
 streamlit
 plotly
-hiplot

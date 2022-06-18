@@ -3,4 +3,9 @@
 # License: MIT License
 
 
+from .app import app
 
+
+__all__ = [
+    "app",
+]
