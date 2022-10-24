@@ -11,7 +11,7 @@ from .widgets import Widgets
 
 def app(search_data, plots):
     try:
-        st.set_page_config(page_title="Tabular Data Explorer", layout="wide")
+        st.set_page_config(page_title="Search Data Explorer", layout="wide")
         st.markdown(
             """
                 <style>
@@ -34,7 +34,7 @@ def app(search_data, plots):
     except:
         pass
 
-    st.sidebar.title("Tabular Data Explorer")
+    st.sidebar.title("Search Data Explorer")
     st.sidebar.text("")
     st.sidebar.text("")
     st.sidebar.text("")

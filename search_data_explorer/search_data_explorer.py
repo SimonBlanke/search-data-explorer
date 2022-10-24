@@ -6,7 +6,7 @@ import os
 import pandas as pd
 
 
-class TabularDataExplorer:
+class SearchDataExplorer:
     def __init__(self, plots=["Overview"], parameters="all"):
         self.plots = plots
         self.parameters = parameters

@@ -24,8 +24,8 @@ def find_version(*filepath):
 
 
 setup(
-    name="tabular_data_explorer",
-    version=find_version("tabular_data_explorer/__init__.py"),
+    name="search_data_explorer",
+    version=find_version("search_data_explorer/__init__.py"),
     author="Simon Blanke",
     author_email="simon.blanke@yahoo.com",
     license="MIT",
@@ -33,7 +33,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     keywords=["visualization", "data-science"],
-    url="https://github.com/SimonBlanke/tabular-data-explorer",
+    url="https://github.com/SimonBlanke/search-data-explorer",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -113,7 +113,7 @@ def parallel_coordinates_hiplot(search_data, plot_title):
 
 
 def scatter_matrix_plotly(
-    search_data, dimensions, color, plotly_width=1200, plotly_height=600
+    search_data, dimensions, color, plotly_width=1100, plotly_height=600
 ):
     fig = px.scatter_matrix(
         search_data,
@@ -128,21 +128,21 @@ def scatter_matrix_plotly(
     return fig
 
 
-def parallel_coordinates_plotly(*args, plotly_width=1200, plotly_height=600, **kwargs):
+def parallel_coordinates_plotly(*args, plotly_width=1100, plotly_height=600, **kwargs):
     fig = px.parallel_coordinates(*args, **kwargs, color_continuous_scale=color_scale)
     fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     return fig
 
 
-def parallel_categories_plotly(*args, plotly_width=1200, plotly_height=600, **kwargs):
+def parallel_categories_plotly(*args, plotly_width=1100, plotly_height=600, **kwargs):
     fig = px.parallel_categories(*args, **kwargs, color_continuous_scale=color_scale)
     fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 
     return fig
 
 
-def scatter_3d_plotly(*args, plotly_width=1200, plotly_height=600, **kwargs):
+def scatter_3d_plotly(*args, plotly_width=1100, plotly_height=600, **kwargs):
     fig = px.scatter_3d(*args, **kwargs, color_continuous_scale=color_scale)
     fig.update_layout(autosize=False, width=plotly_width, height=plotly_height)
 

@@ -1,5 +1,5 @@
 <H1 align="center">
-    Tabular Data Explorer
+    Search Data Explorer
 </H1>
 
 <br>
@@ -24,12 +24,12 @@ Visualize the iris dataset:
 
 ```python
 import plotly.express as px
-from tabular_data_explorer import TabularDataExplorer
+from search_data_explorer import SearchDataExplorer
 
 iris_dataset = px.data.iris()
 iris_dataset.to_csv("iris_dataset.csv", index=False)
 
-board = TabularDataExplorer()
+board = SearchDataExplorer()
 board.open("iris_dataset.csv")
 ```
 
@@ -39,7 +39,7 @@ Or create your own test data and visualize it:
 
 ```python
 import pandas as pd
-from tabular_data_explorer import TabularDataExplorer
+from search_data_explorer import SearchDataExplorer
 
 # create so test dataset for this example
 df_array = [[0.5, 6, 50, 0.6], [0.9, 7, 40, 0.7], [0.2, 9, 70, 0.8]]
@@ -49,7 +49,7 @@ search_data = pd.DataFrame(df_array, columns=columns)
 search_data.to_csv("./search_data.csv")
 
 
-data_explorer = TabularDataExplorer()
+data_explorer = SearchDataExplorer()
 # the dashboard must read the dataframe from a file
 data_explorer.open("./search_data.csv")
 ```

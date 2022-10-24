@@ -6,7 +6,7 @@ __version__ = "0.1.0"
 __license__ = "MIT"
 
 
-from .tabular_data_explorer import TabularDataExplorer
+from .search_data_explorer import SearchDataExplorer
 
 
 __all__ = [
