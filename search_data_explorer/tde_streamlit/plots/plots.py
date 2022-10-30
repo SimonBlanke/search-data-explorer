@@ -72,46 +72,6 @@ def plot_duplicate_rows(df, _st_):
     _st_.plotly_chart(fig)
 
 
-def table_plotly(search_data, plotly_width=1200, plotly_height=600):
-    df_len = len(search_data)
-
-    headerColor = "#b5beff"
-    rowEvenColor = "#e8e8e8"
-    rowOddColor = "white"
-
-    fig = go.Figure(
-        data=[
-            go.Table(
-                header=dict(
-                    values=list(search_data.columns),
-                    fill_color=headerColor,
-                    align="center",
-                ),
-                cells=dict(
-                    values=[search_data[col] for col in search_data.columns],
-                    # fill_color="lavender",
-                    fill_color=[
-                        [
-                            rowOddColor,
-                            rowEvenColor,
-                        ]
-                        * int((df_len / 2) + 1)
-                    ],
-                    align=["center"],
-                    font=dict(size=13),
-                ),
-            )
-        ]
-    )
-    fig.update_layout(width=plotly_width, height=plotly_height)
-    return fig
-
-
-def parallel_coordinates_hiplot(search_data, plot_title):
-    xp = hip.Experiment.from_dataframe(search_data)
-    ret_val = xp.display_st(key=plot_title)
-
-
 def scatter_matrix_plotly(
     search_data, dimensions, color, plotly_width=1100, plotly_height=600
 ):
