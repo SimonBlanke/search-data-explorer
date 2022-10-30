@@ -13,7 +13,7 @@ from search_data_explorer import SearchDataExplorer
 here = os.path.dirname(os.path.realpath(__file__))
 
 
-def next_free_port(port=1024, max_port=65535):
+def next_free_port(port=8501, max_port=65535):
     # from: https://codereview.stackexchange.com/questions/216037/python-scanner-for-the-first-free-port-in-a-range
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     while port <= max_port:
