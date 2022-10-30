@@ -37,7 +37,7 @@ class GuiTests(BaseCase):
         subprocess.Popen(["python", path, port])
         time.sleep(5)
 
-        self.open("http://localhost:" + str(port))
+        self.open("https://localhost:" + str(port))
         time.sleep(1)
 
         current_screenshot_path = os.path.join(here, "current-screenshot.png")
