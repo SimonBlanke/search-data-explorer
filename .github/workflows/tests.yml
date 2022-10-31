@@ -43,6 +43,7 @@ jobs:
 
       - name: Test with pytest
         run: |
+          python tests/run_sde.py &
           python -m pytest tests --cov=search_data_explorer --cov-report=term-missing --cov-report=xml -p no:warnings
 
       - name: Adjust coverage file for Codecov
