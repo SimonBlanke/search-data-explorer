@@ -64,7 +64,7 @@ class Filter:
                 data_types[para_name] = "numeric"
                 num_para_names.append(para_name)
 
-        print("\n data_types \n", data_types, "\n")
+        # print("\n data_types \n", data_types, "\n")
         self.data_types = data_types
         self.cat_para_names = cat_para_names
         self.num_para_names = num_para_names
@@ -181,7 +181,7 @@ class Widgets:
                 data_types[para_name] = "numeric"
                 num_para_names.append(para_name)
 
-        print("\n data_types \n", data_types, "\n")
+        # print("\n data_types \n", data_types, "\n")
         self.data_types = data_types
         self.cat_para_names = cat_para_names
         self.num_para_names = num_para_names
