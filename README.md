@@ -29,8 +29,8 @@ from search_data_explorer import SearchDataExplorer
 iris_dataset = px.data.iris()
 iris_dataset.to_csv("iris_dataset.csv", index=False)
 
-board = SearchDataExplorer()
-board.open("iris_dataset.csv")
+sde = SearchDataExplorer()
+sde.open("iris_dataset.csv")
 ```
 
 <br>
@@ -49,9 +49,9 @@ search_data = pd.DataFrame(df_array, columns=columns)
 search_data.to_csv("./search_data.csv")
 
 
-data_explorer = SearchDataExplorer()
+sde = SearchDataExplorer()
 # the dashboard must read the dataframe from a file
-data_explorer.open("./search_data.csv")
+sde.open("./search_data.csv")
 ```
 
 <br>
