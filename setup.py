@@ -51,4 +51,7 @@ setup(
     ],
     install_requires=requirements,
     python_requires=">=3.5",
+    entry_points={
+        "console_scripts": ["search-data-explorer=search_data_explorer.cli:open"],
+    },
 )
