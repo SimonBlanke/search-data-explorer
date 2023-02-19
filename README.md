@@ -30,6 +30,13 @@ pip install search-data-explorer
 
 ## How to use
 
+The Search Data Explorer has a very simple API, that can be explained by the examples below or just execute the command `search-data-explorer` in a command-line to open the Search Data Explorer without executing a python script.
+
+
+<br>
+
+### search-data requirements
+
 The Search Data Explorer is used by loading the search-data with a few lines of code. The search data that is loaded from file must follow the pattern below. The columns can have any name but must contain the `score`, which is always included in search-data from [Gradient-Free-Optimizers](https://github.com/SimonBlanke/Gradient-Free-Optimizers) or [Hyperactive](https://github.com/SimonBlanke/Hyperactive).
 
 <table class="table">
@@ -73,7 +80,10 @@ The Search Data Explorer is used by loading the search-data with a few lines of 
 <br>
 
 
-The Search Data Explorer has a very simple API, that can be explained by the following examples:
+
+## Examples
+
+<br>
 
 ### Load search-data by passing dataframe
 
