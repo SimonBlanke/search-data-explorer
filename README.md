@@ -8,12 +8,6 @@
     Visualize optimization search-data via plotly in a streamlit dashboard
 </H2>
 
-
-
-<br>
-
-## Introduction
-
 The Search-Data-Explorer is a simple application specialized to visualize search-data generated from [Gradient-Free-Optimizers](https://github.com/SimonBlanke/Gradient-Free-Optimizers) or [Hyperactive](https://github.com/SimonBlanke/Hyperactive). It is designed as an easy-to-use tool to gain insights into multi-dimensional data, as commonly found in optimization.
 
 
