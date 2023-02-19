@@ -5,7 +5,7 @@
 <br>
 
 <H2 align="center">
-    Visualize dataframes via plotly in a streamlit dashboard
+    Visualize optimization search-data via plotly in a streamlit dashboard
 </H2>
 
 
@@ -13,8 +13,9 @@
 
 ## Installation
 
-Coming soon
-
+```console
+pip install search-data-explorer
+```
 
 <br>
 
@@ -56,15 +57,16 @@ sde.open("./search_data.csv")
 
 <br>
 
-The search data that is loaded from file must follow the pattern below. The columns can have any name and some plots can handle data other than numerical.
+The search data that is loaded from file must follow the pattern below. The columns can have any name but must contain the `score`, which is always included in search-data from [Gradient-Free-Optimizers](https://github.com/SimonBlanke/Gradient-Free-Optimizers) or [Hyperactive](https://github.com/SimonBlanke/Hyperactive).
 
 <table class="table">
 <thead class="table-head">
     <tr class="row">
     <td class="cell">first column name</td>
     <td class="cell">another column name</td>
-    <td class="cell">bla bla bla</td>
     <td class="cell">...</td>
+    <td class="cell">score</td>
+
     </tr>
 </thead>
 <tbody class="table-body">
