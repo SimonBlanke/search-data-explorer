@@ -40,7 +40,7 @@ def app(search_data, plots):
     st.sidebar.text("")
 
     if search_data is None:
-        uploaded_file = st.sidebar.file_uploader("Choose a file")
+        uploaded_file = st.sidebar.file_uploader("Load a search-data file:")
         if uploaded_file is not None:
             search_data = pd.read_csv(uploaded_file)
 
