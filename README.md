@@ -9,6 +9,14 @@
 </H2>
 
 
+
+<br>
+
+## Introduction
+
+The Search-Data-Explorer is a simple application specialized to visualize search-data generated from [Gradient-Free-Optimizers](https://github.com/SimonBlanke/Gradient-Free-Optimizers) or [Hyperactive](https://github.com/SimonBlanke/Hyperactive). It is designed as an easy-to-use tool to gain insights into multi-dimensional data, as commonly found in optimization.
+
+
 <br>
 
 ## Installation
@@ -19,45 +27,9 @@ pip install search-data-explorer
 
 <br>
 
-## Examples
+## How to use
 
-Visualize the iris dataset:
-
-```python
-import plotly.express as px
-from search_data_explorer import SearchDataExplorer
-
-iris_dataset = px.data.iris()
-iris_dataset.to_csv("iris_dataset.csv", index=False)
-
-sde = SearchDataExplorer()
-sde.open("iris_dataset.csv")
-```
-
-<br>
-
-Or create your own test data and visualize it:
-
-```python
-import pandas as pd
-from search_data_explorer import SearchDataExplorer
-
-# create so test dataset for this example
-df_array = [[0.5, 6, 50, 0.6], [0.9, 7, 40, 0.7], [0.2, 9, 70, 0.8]]
-columns = ["x1", "x2", "x3", "score"]
-search_data = pd.DataFrame(df_array, columns=columns)
-# save the dataframe to file
-search_data.to_csv("./search_data.csv")
-
-
-sde = SearchDataExplorer()
-# the dashboard must read the dataframe from a file
-sde.open("./search_data.csv")
-```
-
-<br>
-
-The search data that is loaded from file must follow the pattern below. The columns can have any name but must contain the `score`, which is always included in search-data from [Gradient-Free-Optimizers](https://github.com/SimonBlanke/Gradient-Free-Optimizers) or [Hyperactive](https://github.com/SimonBlanke/Hyperactive).
+The Search Data Explorer is used by loading the search-data with a few lines of code. The search data that is loaded from file must follow the pattern below. The columns can have any name but must contain the `score`, which is always included in search-data from [Gradient-Free-Optimizers](https://github.com/SimonBlanke/Gradient-Free-Optimizers) or [Hyperactive](https://github.com/SimonBlanke/Hyperactive).
 
 <table class="table">
 <thead class="table-head">
@@ -74,13 +46,13 @@ The search data that is loaded from file must follow the pattern below. The colu
     <td class="cell">0.756</td>
     <td class="cell">0.1</td>
     <td class="cell">0.2</td>
-    <td class="cell">...</td>
+    <td class="cell">-3</td>
     </tr>
     <tr class="row">
     <td class="cell">0.823</td>
     <td class="cell">0.3</td>
     <td class="cell">0.1</td>
-    <td class="cell">...</td>
+    <td class="cell">-10</td>
     </tr>
     <tr class="row">
     <td class="cell">...</td>
@@ -97,6 +69,121 @@ The search data that is loaded from file must follow the pattern below. The colu
 </tbody>
 </table>
 
+<br>
 
+
+The Search Data Explorer has a very simple API, that can be explained by the following examples:
+
+### Load search-data by passing dataframe
+
+You can pass the search-data directly, if you do not want to save your search-data to disk and just explore it one time after the optimization has finished.
+
+```python
+import numpy as np
+from gradient_free_optimizers import RandomSearchOptimizer
+
+from search_data_explorer import SearchDataExplorer
+
+
+def parabola_function(para):
+    loss = para["x"] * para["x"] + para["y"] * para["y"] + para["y"] * para["y"]
+    return -loss
+
+
+search_space = {
+    "x": np.arange(-10, 10, 0.1),
+    "y": np.arange(-10, 10, 0.1),
+    "z": np.arange(-10, 10, 0.1),
+}
+
+# generate search-data for this example with gradient-free-optimizers
+
+opt = RandomSearchOptimizer(search_space)
+opt.search(parabola_function, n_iter=1000)
+
+search_data = opt.search_data
+
+
+# Open Search-Data-Explorer
+
+sde = SearchDataExplorer()
+sde.open(search_data)  # pass search-data
+```
+
+
+### Load search-data by passing path to file
+
+If you already have a search-data file on disk you can pass the path to the file to the search-data-explorer.
+
+```python
+import numpy as np
+from gradient_free_optimizers import RandomSearchOptimizer
+
+from search_data_explorer import SearchDataExplorer
+
+
+def parabola_function(para):
+    loss = para["x"] * para["x"] + para["y"] * para["y"] + para["y"] * para["y"]
+    return -loss
+
+
+search_space = {
+    "x": np.arange(-10, 10, 0.1),
+    "y": np.arange(-10, 10, 0.1),
+    "z": np.arange(-10, 10, 0.1),
+}
+
+# generate search-data for this example with gradient-free-optimizers
+
+opt = RandomSearchOptimizer(search_space)
+opt.search(parabola_function, n_iter=1000)
+
+search_data = opt.search_data
+search_data.to_csv("search_data.csv", index=False)
+
+
+# Open Search-Data-Explorer
+
+sde = SearchDataExplorer()
+sde.open("model1.csv")  # pass path to file on disk
+```
+
+
+### Load search-data by browsing for file
+
+You can just open the search-data-explorer without passing a file or path. In this case you can browse for the file via a menu inside the search-data-explorer.
+
+```python
+import numpy as np
+from gradient_free_optimizers import RandomSearchOptimizer
+
+from search_data_explorer import SearchDataExplorer
+
+
+def parabola_function(para):
+    loss = para["x"] * para["x"] + para["y"] * para["y"] + para["y"] * para["y"]
+    return -loss
+
+
+search_space = {
+    "x": np.arange(-10, 10, 0.1),
+    "y": np.arange(-10, 10, 0.1),
+    "z": np.arange(-10, 10, 0.1),
+}
+
+# generate search-data for this example with gradient-free-optimizers
+
+opt = RandomSearchOptimizer(search_space)
+opt.search(parabola_function, n_iter=1000)
+
+search_data = opt.search_data
+search_data.to_csv("search_data.csv", index=False)
+
+
+# Open Search-Data-Explorer
+
+sde = SearchDataExplorer()
+sde.open()  # start without passing anything and use the file explorer within the search-data-explorer
+```
 
 
