@@ -19,6 +19,13 @@ The Search-Data-Explorer is a simple application specialized to visualize search
 
 <br>
 
+## Disclaimer
+
+This project is in an early development stage and is only tested manually. If you encounter bugs or have suggestions for improvements, then please open an issue.
+
+
+<br>
+
 ## Installation
 
 ```console
