@@ -10,6 +10,8 @@
 
 The Search-Data-Explorer is a simple application specialized to visualize search-data generated from [Gradient-Free-Optimizers](https://github.com/SimonBlanke/Gradient-Free-Optimizers) or [Hyperactive](https://github.com/SimonBlanke/Hyperactive). It is designed as an easy-to-use tool to gain insights into multi-dimensional data, as commonly found in optimization.
 
+I created this package, because I needed a convenient tool to visually analyse search-data during the development of gradient-free-optimization algorithms. My goal for this package is to help users get insight into the search-data and its corresponding objective-function and search-space. Building on this insight could help improve the selection of the search-space, compare models in the objective-function or explain the behaviour of the optimization algorithm.
+
 
 <br>
 
