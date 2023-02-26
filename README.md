@@ -30,7 +30,7 @@ pip install search-data-explorer
 
 ## How to use
 
-The Search Data Explorer has a very simple API, that can be explained by the examples below or just execute the command `search-data-explorer` in a command-line to open the Search Data Explorer without executing a python script.
+The Search Data Explorer has a very simple API, that can be explained by the examples below or just execute the command "`search-data-explorer` [file]" to open the Search Data Explorer without executing a python script.
 
 
 <br>
