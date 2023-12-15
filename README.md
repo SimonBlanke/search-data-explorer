@@ -79,11 +79,12 @@ The Search Data Explorer is used by loading the search-data with a few lines of 
 </tbody>
 </table>
 
+
+
 <br>
 
-
-
 ## Examples
+
 
 <br>
 
@@ -124,6 +125,8 @@ sde.open(search_data)  # pass search-data
 ```
 
 
+<br>
+
 ### Load search-data by passing path to file
 
 If you already have a search-data file on disk you can pass the path to the file to the search-data-explorer.
@@ -161,6 +164,8 @@ sde = SearchDataExplorer()
 sde.open("model1.csv")  # pass path to file on disk
 ```
 
+
+<br>
 
 ### Load search-data by browsing for file
 
