@@ -48,7 +48,6 @@ The Search Data Explorer is used by loading the search-data with a few lines of 
     <td class="cell">another column name</td>
     <td class="cell">...</td>
     <td class="cell">score</td>
-
     </tr>
 </thead>
 <tbody class="table-body">
