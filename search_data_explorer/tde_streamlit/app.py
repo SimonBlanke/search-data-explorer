@@ -69,13 +69,12 @@ def app(path, plots):
 def create_widgets(search_data):
     widgets = Widgets(search_data)
 
-    plot_names = st.sidebar.multiselect(
-        label="Select Widgets:",
+    plot_name = st.sidebar.selectbox(
+        label="Select Widget:",
         options=list(widgets.plots_select_dict.keys()),
     )
 
-    for plot_name in plot_names:
-        widgets.plots_select_dict[plot_name]()
+    widgets.plots_select_dict[plot_name]()
 
-        for _ in range(7):
-            st.write(" ")
+    for _ in range(7):
+        st.write(" ")
