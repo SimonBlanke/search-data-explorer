@@ -55,7 +55,7 @@ def app(path, plots):
     st.sidebar.text("")
     st.sidebar.text("")
 
-    if path is "no_path":
+    if path == "no_path":
         uploaded_file = st.sidebar.file_uploader("Load a search-data file:")
         if uploaded_file is not None:
             search_data = pd.read_csv(uploaded_file)
