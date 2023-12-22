@@ -5,11 +5,27 @@
 
 import pandas as pd
 import streamlit as st
+import sqlalchemy as sql
 
 from .widgets import Widgets
 
 
-def app(search_data, plots):
+def read_search_data(path):
+    if path.endswith(".csv"):
+        search_data = pd.read_csv(path)
+    elif path.endswith(".db"):
+        dbEngine = sql.create_engine("sqlite:///" + path)
+        tables = sql.inspect(dbEngine).get_table_names()
+        table = st.sidebar.selectbox("Tables", tables)
+        search_data = pd.read_sql_table(table, dbEngine)
+
+    if len(search_data) == 0:
+        print("---> Error: Search data is empty!")
+    else:
+        return search_data
+
+
+def app(path, plots):
     try:
         st.set_page_config(page_title="Search Data Explorer", layout="wide")
         st.markdown(
@@ -39,10 +55,12 @@ def app(search_data, plots):
     st.sidebar.text("")
     st.sidebar.text("")
 
-    if search_data is None:
+    if path is "no_path":
         uploaded_file = st.sidebar.file_uploader("Load a search-data file:")
         if uploaded_file is not None:
             search_data = pd.read_csv(uploaded_file)
+    else:
+        search_data = read_search_data(path)
 
     if search_data is not None:
         create_widgets(search_data)
