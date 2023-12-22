@@ -69,7 +69,7 @@ class Filter:
         self.cat_para_names = cat_para_names
         self.num_para_names = num_para_names
 
-    def filter_parameter(self, _st_, para_names=None):
+    def filter_parameter(self, _st_, search_data, para_names=None):
         _name_ = "filter_parameter"
 
         if para_names is None:
@@ -80,7 +80,7 @@ class Filter:
             options=para_names,
         )
 
-        search_data = self.search_data.copy()
+        search_data = search_data.copy()
         for para_name in para_names_fil:
             para_data = search_data[para_name].values
 
@@ -234,7 +234,23 @@ class Widgets:
 
         col1.divider()
 
-        search_data_f = self.filter.filter_parameter(col1)
+        set_parameters = [
+            item
+            for item in self.col_names
+            if item not in [scatter2_para1, scatter2_para2, color_para]
+        ]
+
+        search_data = self.search_data.copy()
+
+        for set_parameter in set_parameters:
+            para_data = search_data[set_parameter].values
+            cat_values = np.unique(para_data)
+            cat_value = col1.selectbox("Set " + set_parameter, cat_values)
+            search_data = search_data[search_data[set_parameter] == cat_value]
+
+        col1.divider()
+
+        search_data_f = self.filter.filter_parameter(col1, search_data)
         plotly_kwargs = {
             "data_frame": search_data_f,
             "x": scatter2_para1,
@@ -280,7 +296,7 @@ class Widgets:
 
         col1.divider()
 
-        search_data_f = self.filter.filter_parameter(col1)
+        search_data_f = self.filter.filter_parameter(col1, self.search_data)
         plotly_kwargs = {
             "data_frame": search_data_f,
             "x": scatter3_para1,
@@ -318,7 +334,9 @@ class Widgets:
         else:
             para_names_f_s = para_names_f
 
-        search_data_f = self.filter.filter_parameter(col1, para_names=para_names_f_s)
+        search_data_f = self.filter.filter_parameter(
+            col1, self.search_data, para_names=para_names_f_s
+        )
         color_para = self.select_color_para_num(
             col1, "parallel_coordinates_plotly_widget"
         )
@@ -337,7 +355,7 @@ class Widgets:
         para_names_f = self.add_parameters_num(
             col1, "parallel_categories_plotly_widget"
         )
-        search_data_f = self.filter.filter_parameter(col1)
+        search_data_f = self.filter.filter_parameter(col1, self.search_data)
 
         color_para = self.select_color_para_num(
             col1, "parallel_categories_plotly_widget"
