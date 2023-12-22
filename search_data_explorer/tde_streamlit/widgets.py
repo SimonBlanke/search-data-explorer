@@ -296,7 +296,23 @@ class Widgets:
 
         col1.divider()
 
-        search_data_f = self.filter.filter_parameter(col1, self.search_data)
+        set_parameters = [
+            item
+            for item in self.col_names
+            if item not in [scatter3_para1, scatter3_para2, scatter3_para3, color_para]
+        ]
+
+        search_data = self.search_data.copy()
+
+        for set_parameter in set_parameters:
+            para_data = search_data[set_parameter].values
+            cat_values = np.unique(para_data)
+            cat_value = col1.selectbox("Set " + set_parameter, cat_values)
+            search_data = search_data[search_data[set_parameter] == cat_value]
+
+        col1.divider()
+
+        search_data_f = self.filter.filter_parameter(col1, search_data)
         plotly_kwargs = {
             "data_frame": search_data_f,
             "x": scatter3_para1,
