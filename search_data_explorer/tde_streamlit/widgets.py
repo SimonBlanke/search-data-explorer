@@ -84,10 +84,12 @@ class Filter:
         for para_name in para_names_fil:
             para_data = search_data[para_name].values
 
+            _st_.divider()
+
             if self.data_types[para_name] == "categorical":
                 cat_values = np.unique(para_data)
                 cat_values_fil = _st_.multiselect(
-                    label="Filter Parameters:",
+                    label="filter '" + para_name + "' parameters:",
                     options=cat_values,
                     default=cat_values,
                 )
@@ -102,15 +104,13 @@ class Filter:
                 if step == 0:
                     continue
 
-                (lower, upper) = _st_.slider(
-                    "Filter: " + str(para_name),
-                    min_value=min_,
-                    max_value=max_,
-                    value=(min_, max_),
-                    step=step,
-                    format="%.5f",
+                col1, col2 = _st_.columns([1, 1])
+                lower = col1.number_input(
+                    "'" + para_name + "' lower bound:", min_, max_, min_
                 )
-                _st_.text("")
+                upper = col2.number_input(
+                    "'" + para_name + "' upper bound:", min_, max_, max_
+                )
 
                 search_data = search_data[
                     (search_data[para_name] >= lower)
@@ -128,10 +128,7 @@ def create_title(title):
     def decorator(widget):
         def wrapper(*args, **kwargs):
             st.title(title)
-            st.components.v1.html(
-                """<hr style="height:1px;border:none;color:#333;background-color:#333;" /> """,
-                height=10,
-            )
+            st.divider()
             st.text("")
             result = widget(*args, **kwargs)
             return result
@@ -235,7 +232,7 @@ class Widgets:
         scatter2_para2 = select_parameter(**select_para_d_2)
         color_para = select_parameter(**select_para_d_3)
 
-        col1.markdown("---")
+        col1.divider()
 
         search_data_f = self.filter.filter_parameter(col1)
         plotly_kwargs = {
@@ -281,7 +278,7 @@ class Widgets:
         scatter3_para3 = select_parameter(**select_para_d_3)
         color_para = select_parameter(**select_para_d_4)
 
-        col1.markdown("---")
+        col1.divider()
 
         search_data_f = self.filter.filter_parameter(col1)
         plotly_kwargs = {
