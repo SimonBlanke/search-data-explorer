@@ -9,7 +9,7 @@ import pandas as pd
 
 def create_plotly_chart(_st_, plot_func, plot_kwargs):
     fig = plot_func(**plot_kwargs)
-    _st_.plotly_chart(fig)
+    _st_.plotly_chart(fig, use_container_width=True)
 
 
 def to_int(number):
