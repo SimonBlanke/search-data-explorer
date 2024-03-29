@@ -7,11 +7,11 @@ import pandas as pd
 import streamlit as st
 import sqlalchemy as sql
 
-from .widgets import Widgets
+from .components import Widgets
 
 
 def read_search_data(path):
-    if path.endswith(".csv"):
+    if path.endswith((".csv", ".csv~")):
         search_data = pd.read_csv(path)
     elif path.endswith(".db"):
         dbEngine = sql.create_engine("sqlite:///" + path)

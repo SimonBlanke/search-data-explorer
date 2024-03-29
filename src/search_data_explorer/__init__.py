@@ -2,7 +2,9 @@
 # Email: simon.blanke@yahoo.com
 # License: MIT License
 
-__version__ = "0.4.2"
+import importlib.metadata
+
+__version__ = importlib.metadata.version("search-data-explorer")
 __license__ = "MIT"
 
 
