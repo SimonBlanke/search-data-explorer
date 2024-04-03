@@ -44,6 +44,3 @@ test = ["coverage"]
 "Homepage" = "https://github.com/SimonBlanke/search-data-explorer"
 "Bug Reports" = "https://github.com/SimonBlanke/search-data-explorer/issues"
 "Source" = "https://github.com/SimonBlanke/search-data-explorer"
-
-[tool.pytest.ini_options]
-pythonpath = "src"
